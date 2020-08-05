@@ -1,7 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View, Linking, BackHandler, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-
+import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { Entypo } from '@expo/vector-icons'; 
 
 const DrawerContent = () => {
     return (
@@ -20,6 +21,7 @@ const DrawerContent = () => {
 
             <TouchableOpacity 
             style={styles.touchableButton}>
+                <MaterialCommunityIcons name="exit-to-app" size={24} color="black" style={styles.iconStyle}/>
                 <Text 
                 style={styles.touchableButtonText}>Link 3</Text>
             </TouchableOpacity>
@@ -27,19 +29,13 @@ const DrawerContent = () => {
             <TouchableOpacity 
             style={styles.touchableButton}
             onPress={() => {Linking.openURL('https://expo.io');}}>
-                <Image 
-                source={require("../assets/star.png")}
-                fadeDuration={0}
-                style={styles.iconStyle}/>
+                <MaterialCommunityIcons name="star" size={24} color="yellow" style={styles.iconStyle}/>
                 <Text style={styles.touchableButtonText}>Rate us</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
             style={styles.touchableButton}>
-                <Image 
-                source={require("../assets/share.png")}
-                fadeDuration={0}
-                style={styles.iconStyle}/>
+                <Entypo name="share" size={24} color="yellow" style={styles.iconStyle}/>
                 <Text style={styles.touchableButtonText}></Text>
                 <Text 
                 style={styles.touchableButtonText}>Share</Text>
@@ -48,10 +44,7 @@ const DrawerContent = () => {
             <TouchableOpacity 
             style={styles.touchableButton}
             onPress={() => {BackHandler.exitApp();}}>
-                <Image 
-                source={require("../assets/quit.png")}
-                fadeDuration={0}
-                style={styles.iconStyle}/>
+                <MaterialCommunityIcons name="exit-to-app" size={24} color="yellow" style={styles.iconStyle}/>
                 <Text 
                 style={styles.touchableButtonText}>Quit</Text>
             </TouchableOpacity>
@@ -75,8 +68,6 @@ const styles = StyleSheet.create({
         color:"#E7D7C1"
     },
     iconStyle:{
-        width:20,
-        height:20,
         marginRight:5
     }
 })

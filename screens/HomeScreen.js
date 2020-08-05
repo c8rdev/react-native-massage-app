@@ -1,54 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, Dimensions, Button, Vibration } from 'react-native'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import DropdownAlert from 'react-native-dropdownalert';
 
 
 
 const HomeScreen = () => {
-    
+
+    const [dropDownAlertRef, setDropDownAlertRef] = useState(null)
+
     const PATTERN_SOFT = [
         1000,
         1000,
-      ];
+    ];
     const PATTERN_FASTER = [
         700,
         800,
-      ];
-    
+    ];
+
     const PATTERN_HARD = [
         300,
         600,
-      ];
-    
+    ];
+
     const PATTERN_GODLIKE = [
         30,
         300,
-      ];
-    
+    ];
+
     const onSoftPress = async () => {
         //
-        Vibration.vibrate(PATTERN_SOFT,true)
+        Vibration.vibrate(PATTERN_SOFT, true)
+        dropDownAlertRef.alertWithType('success', '', 'Soft Mode Started');
     }
 
     const onFasterPress = async () => {
         //
-        Vibration.vibrate(PATTERN_FASTER,true)
+        Vibration.vibrate(PATTERN_FASTER, true)
+        dropDownAlertRef.alertWithType('success', '', 'Faster Mode Started');
     }
 
     const onHardPress = async () => {
         //
-        Vibration.vibrate(PATTERN_HARD,true)
+        Vibration.vibrate(PATTERN_HARD, true)
+        dropDownAlertRef.alertWithType('success', '', 'Hard Mode Started');
     }
 
     const onGodlikePress = async () => {
         //
-        Vibration.vibrate(PATTERN_GODLIKE,true)
+        Vibration.vibrate(PATTERN_GODLIKE, true)
+        dropDownAlertRef.alertWithType('success', '', 'Godlike Mode Started');
     }
 
     const onStopPress = async () => {
         // vibration cancel
         Vibration.cancel()
+        dropDownAlertRef.alertWithType('error', '', 'Vibration Stopped');
     }
 
 
@@ -86,6 +94,7 @@ const HomeScreen = () => {
 
     return (
         <View style={{ height: '100%' }}>
+            <DropdownAlert ref={ref => setDropDownAlertRef(ref)} />
             <ScrollView
                 contentContainerStyle={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#ededed' }}
             >
@@ -120,7 +129,7 @@ const HomeScreen = () => {
                 title="Stop"
                 color="#EB5400"
                 onPress={onStopPress}
-                style={{paddingVertical:20}}
+                style={{ paddingVertical: 20 }}
             />
         </View>
     )

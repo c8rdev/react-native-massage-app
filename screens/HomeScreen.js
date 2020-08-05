@@ -6,32 +6,44 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 
 const HomeScreen = () => {
-    const ONE_SECOND_IN_MS = 1000;
-    const PATTERN = [
-        2 * ONE_SECOND_IN_MS,
-        4 * ONE_SECOND_IN_MS,
-        8 * ONE_SECOND_IN_MS,
-        16 * ONE_SECOND_IN_MS,
+    
+    const PATTERN_SOFT = [
+        1000,
+        1000,
+      ];
+    const PATTERN_FASTER = [
+        700,
+        800,
+      ];
+    
+    const PATTERN_HARD = [
+        300,
+        600,
+      ];
+    
+    const PATTERN_GODLIKE = [
+        30,
+        300,
       ];
     
     const onSoftPress = async () => {
         //
-        Vibration.vibrate(PATTERN[0])
+        Vibration.vibrate(PATTERN_SOFT,true)
     }
 
     const onFasterPress = async () => {
         //
-        Vibration.vibrate(PATTERN[1])
+        Vibration.vibrate(PATTERN_FASTER,true)
     }
 
     const onHardPress = async () => {
         //
-        Vibration.vibrate(PATTERN[2])
+        Vibration.vibrate(PATTERN_HARD,true)
     }
 
     const onGodlikePress = async () => {
         //
-        Vibration.vibrate(PATTERN[3])
+        Vibration.vibrate(PATTERN_GODLIKE,true)
     }
 
     const onStopPress = async () => {
@@ -108,6 +120,7 @@ const HomeScreen = () => {
                 title="Stop"
                 color="#EB5400"
                 onPress={onStopPress}
+                style={{paddingVertical:20}}
             />
         </View>
     )

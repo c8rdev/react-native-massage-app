@@ -52,11 +52,11 @@ export default DrawerContent
 const styles = StyleSheet.create({
     touchableButton:{
         alignItems:"center",
-        backgroundColor: "#F786AA",
+        backgroundColor: "#690375",
         paddingVertical:30,
     },
     touchableButtonText:{
         fontSize:24,
-        color:"#A14A76"
+        color:"#E7D7C1"
     }
 })

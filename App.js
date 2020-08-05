@@ -4,6 +4,7 @@ import { Router, Drawer, Scene } from 'react-native-router-flux';
 import HomeScreen from './screens/HomeScreen';
 import DrawerIcon from './assets/drawer.png'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import DrawerContent from './components/DrawerContent';
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Drawer
         key="root"
         drawerIcon={<MaterialCommunityIcons name="menu" size={36} />}
+        contentComponent={() => <DrawerContent />}
       >
         <Scene
           key={"HomeScreen"}

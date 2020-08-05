@@ -6,28 +6,32 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 
 const HomeScreen = () => {
-
-
-
-
+    const ONE_SECOND_IN_MS = 1000;
+    const PATTERN = [
+        2 * ONE_SECOND_IN_MS,
+        4 * ONE_SECOND_IN_MS,
+        8 * ONE_SECOND_IN_MS,
+        16 * ONE_SECOND_IN_MS,
+      ];
+    
     const onSoftPress = async () => {
         //
-        let pattern = "wait 1s, vibrate 2s"
+        Vibration.vibrate(PATTERN[0])
     }
 
     const onFasterPress = async () => {
         //
-        let pattern = "wait 1s, vibrate 2s"
+        Vibration.vibrate(PATTERN[1])
     }
 
     const onHardPress = async () => {
         //
-        let pattern = "wait 1s, vibrate 2s"
+        Vibration.vibrate(PATTERN[2])
     }
 
     const onGodlikePress = async () => {
         //
-        let pattern = "wait 1s, vibrate 2s"
+        Vibration.vibrate(PATTERN[3])
     }
 
     const onStopPress = async () => {

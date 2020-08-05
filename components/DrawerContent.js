@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Linking } from 'react-native'
+import { StyleSheet, Text, View, Linking, BackHandler } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
@@ -34,6 +34,13 @@ const DrawerContent = () => {
             style={styles.touchableButton}>
                 <Text 
                 style={styles.touchableButtonText}>Share</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+            style={styles.touchableButton}
+            onPress={() => {BackHandler.exitApp();}}>
+                <Text 
+                style={styles.touchableButtonText}>Quit</Text>
             </TouchableOpacity>
 
         </View>

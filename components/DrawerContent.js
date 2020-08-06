@@ -1,73 +1,67 @@
 import React from 'react'
-import { StyleSheet, Text, View, Linking, BackHandler, Image } from 'react-native'
+import { StyleSheet, Text, View, Linking, BackHandler, Image, Share, Vibration } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { MaterialCommunityIcons } from "@expo/vector-icons"
-import { Entypo } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons';
 
 const DrawerContent = () => {
+
+
+    const DrawerLink = ({ onPress, title, icon }) => {
+        return (
+
+            <TouchableOpacity
+                onPress={onPress}
+                style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    margin: 10,
+                    marginLeft: '15%',
+
+                }}>
+                <MaterialCommunityIcons
+                    name={icon}
+                    size={24}
+                />
+                <Text
+                    style={{
+                        marginLeft: 10,
+                        fontSize: 16
+                    }}>{title}</Text>
+            </TouchableOpacity>
+
+        )
+    }
+
     return (
-        <View>
-            <TouchableOpacity 
-            style={styles.touchableButton}>
-                <Text 
-                style={styles.touchableButtonText}>Link 1</Text>
-            </TouchableOpacity>
+        <View style={{ justifyContent: 'center', height: '100%' }}>
 
-            <TouchableOpacity 
-            style={styles.touchableButton}>
-                <Text 
-                style={styles.touchableButtonText}>Link 2</Text>
-            </TouchableOpacity>
+            <DrawerLink
+                title="Rate Us"
+                icon="star"
+                onPress={() => {
+                    Linking.openURL('https://expo.io')
+                }}
+            />
 
-            <TouchableOpacity 
-            style={styles.touchableButton}>
-                <MaterialCommunityIcons name="exit-to-app" size={24} color="black" style={styles.iconStyle}/>
-                <Text 
-                style={styles.touchableButtonText}>Link 3</Text>
-            </TouchableOpacity>
+            <DrawerLink
+                title="Share"
+                icon="share-variant"
+                onPress={() => {
+                    Share.share({ message: `It's AWESOME! Vibration feels good`, url:"", title:"Vibration App" })
+                }}
+            />
 
-            <TouchableOpacity 
-            style={styles.touchableButton}
-            onPress={() => {Linking.openURL('https://expo.io');}}>
-                <MaterialCommunityIcons name="star" size={24} color="yellow" style={styles.iconStyle}/>
-                <Text style={styles.touchableButtonText}>Rate us</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-            style={styles.touchableButton}>
-                <Entypo name="share" size={24} color="yellow" style={styles.iconStyle}/>
-                <Text style={styles.touchableButtonText}></Text>
-                <Text 
-                style={styles.touchableButtonText}>Share</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-            style={styles.touchableButton}
-            onPress={() => {BackHandler.exitApp();}}>
-                <MaterialCommunityIcons name="exit-to-app" size={24} color="yellow" style={styles.iconStyle}/>
-                <Text 
-                style={styles.touchableButtonText}>Quit</Text>
-            </TouchableOpacity>
-
+            <DrawerLink
+                title="Exit App"
+                icon="exit-to-app"
+                onPress={() => {
+                    Vibration.cancel()
+                    BackHandler.exitApp()
+                }}
+            />
         </View>
     )
 }
 
 export default DrawerContent
-
-const styles = StyleSheet.create({
-    touchableButton:{
-        alignItems:"center",
-        backgroundColor: "#690375",
-        paddingVertical:30,
-        flexDirection:"row",
-        paddingStart:20
-    },
-    touchableButtonText:{
-        fontSize:24,
-        color:"#E7D7C1"
-    },
-    iconStyle:{
-        marginRight:5
-    }
-})

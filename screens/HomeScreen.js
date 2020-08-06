@@ -1,19 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Dimensions, Button, Vibration, Platform } from 'react-native'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DropdownAlert from 'react-native-dropdownalert';
-import {AdmobInterstitial, AdmobBanner, AdMobBanner} from "expo-ads-admob"
+import { AdmobInterstitial, AdmobBanner, AdMobBanner, AdMobInterstitial } from "expo-ads-admob"
 
 
 const HomeScreen = () => {
-    //const [bannerAdId, setbannerAdId] = useState(null)
-    //const [interstitialAdId, setinterstitialAdId] = useState(null)
     const [dropDownAlertRef, setDropDownAlertRef] = useState(null)
-
-    //setbannerAdId = Platform.OS === "ios" ? "ca-app-pub-3940256099942544/6300978111": "ca-app-pub-3940256099942544/6300978111"
-    //setinterstitialAdId = Platform.OS === "ios" ? "ca-app-pub-3940256099942544/1033173712" : "ca-app-pub-3940256099942544/1033173712"
-
     const PATTERN_SOFT = [
         1000,
         1000,
@@ -53,8 +47,12 @@ const HomeScreen = () => {
 
     const onGodlikePress = async () => {
         //
-        Vibration.vibrate(PATTERN_GODLIKE, true)
-        dropDownAlertRef.alertWithType('success', '', 'Godlike Mode Started');
+
+        await AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712'); // Test ID, Replace with your-admob-unit-id
+        await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
+        await AdMobInterstitial.showAdAsync();
+
+  
     }
 
     const onStopPress = async () => {
@@ -63,6 +61,20 @@ const HomeScreen = () => {
         dropDownAlertRef.alertWithType('error', '', 'Vibration Stopped');
     }
 
+
+    useEffect(() => {
+
+        AdMobInterstitial.addEventListener('interstitialDidClose', () => {
+            console.log("CLOSED")
+            Vibration.vibrate(PATTERN_GODLIKE, true)
+            dropDownAlertRef.alertWithType('success', '', 'Godlike Mode Started');
+            
+        })
+
+        return () => {
+            AdMobInterstitial.removeAllListeners()
+        }
+    }, [])
 
 
 
@@ -97,7 +109,7 @@ const HomeScreen = () => {
     }
 
     return (
-        <View style={{ height: '100%', backgroundColor: "#ededed" }}>
+        <View style={{ height: '100%', backgroundColor: "#ededed", width: '100%', alignItems: 'center' }}>
             <DropdownAlert ref={ref => setDropDownAlertRef(ref)} />
             <ScrollView
                 contentContainerStyle={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#ededed' }}
@@ -132,16 +144,15 @@ const HomeScreen = () => {
             <TouchableOpacity
                 style={styles.stopButton}
                 onPress={onStopPress}
-                >
-                <Text style={styles.stopButtonText}>STOP IT</Text>
+            >
+                <Text style={styles.stopButtonText}>STOP</Text>
             </TouchableOpacity>
-            <AdMobBanner 
-                    bannerSize="banner"
-                    adUnitID="ca-app-pub-3940256099942544/6300978111"
-                    setTestDeviceIDAsync="EMULATOR"
-                    onDidFailToReceiveAdWithError={(e)=> {console.log(e)}}
-                />
-            
+            <AdMobBanner
+                bannerSize="banner"
+                adUnitID="ca-app-pub-3940256099942544/6300978111"
+                onDidFailToReceiveAdWithError={(e) => { console.log(e) }}
+            />
+
         </View>
     )
 }
@@ -149,14 +160,16 @@ const HomeScreen = () => {
 export default HomeScreen
 
 const styles = StyleSheet.create({
-    stopButton:{
-        paddingVertical:20,
-        borderRadius:60,
-        backgroundColor:"#EB5400",
-        alignItems:"center",
-        marginHorizontal:50,
+    stopButton: {
+        paddingVertical: 10,
+        marginVertical: 10,
+        borderRadius: 60,
+        backgroundColor: "#EB5400",
+        alignItems: "center",
+        marginHorizontal: 50,
+        paddingHorizontal: 50
     },
-    stopButtonText:{
-        color:"white",
+    stopButtonText: {
+        color: "white",
     }
 })

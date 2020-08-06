@@ -1,12 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Router, Drawer, Scene } from 'react-native-router-flux';
 import HomeScreen from './screens/HomeScreen';
-import DrawerIcon from './assets/drawer.png'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DrawerContent from './components/DrawerContent';
+import { setTestDeviceIDAsync } from 'expo-ads-admob';
 
 export default function App() {
+
+
+  useEffect(() => {
+
+    setTestDeviceIDAsync("EMULATOR")
+
+
+
+  }, [])
+
   return (
     <Router>
       <Drawer

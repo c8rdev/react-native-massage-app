@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Dimensions, Button, Vibration } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, Button, Vibration, Platform } from 'react-native'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DropdownAlert from 'react-native-dropdownalert';
-
+import {AdmobInterstitial, AdmobBanner, AdMobBanner} from "expo-ads-admob"
 
 
 const HomeScreen = () => {
-
+    //const [bannerAdId, setbannerAdId] = useState(null)
+    //const [interstitialAdId, setinterstitialAdId] = useState(null)
     const [dropDownAlertRef, setDropDownAlertRef] = useState(null)
+
+    //setbannerAdId = Platform.OS === "ios" ? "ca-app-pub-3940256099942544/6300978111": "ca-app-pub-3940256099942544/6300978111"
+    //setinterstitialAdId = Platform.OS === "ios" ? "ca-app-pub-3940256099942544/1033173712" : "ca-app-pub-3940256099942544/1033173712"
 
     const PATTERN_SOFT = [
         1000,
@@ -93,7 +97,7 @@ const HomeScreen = () => {
     }
 
     return (
-        <View style={{ height: '100%' }}>
+        <View style={{ height: '100%', backgroundColor: "#ededed" }}>
             <DropdownAlert ref={ref => setDropDownAlertRef(ref)} />
             <ScrollView
                 contentContainerStyle={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#ededed' }}
@@ -125,16 +129,34 @@ const HomeScreen = () => {
                 />
 
             </ScrollView>
-            <Button
-                title="Stop"
-                color="#EB5400"
+            <TouchableOpacity
+                style={styles.stopButton}
                 onPress={onStopPress}
-                style={{ paddingVertical: 20 }}
-            />
+                >
+                <Text style={styles.stopButtonText}>STOP IT</Text>
+            </TouchableOpacity>
+            <AdMobBanner 
+                    bannerSize="banner"
+                    adUnitID="ca-app-pub-3940256099942544/6300978111"
+                    setTestDeviceIDAsync="EMULATOR"
+                    onDidFailToReceiveAdWithError={(e)=> {console.log(e)}}
+                />
+            
         </View>
     )
 }
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    stopButton:{
+        paddingVertical:20,
+        borderRadius:60,
+        backgroundColor:"#EB5400",
+        alignItems:"center",
+        marginHorizontal:50,
+    },
+    stopButtonText:{
+        color:"white",
+    }
+})

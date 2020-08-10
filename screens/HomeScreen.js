@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Dimensions, Button, Vibration, Platform } from 
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DropdownAlert from 'react-native-dropdownalert';
-import { AdmobInterstitial, AdmobBanner, AdMobBanner, AdMobInterstitial } from "expo-ads-admob"
+import { AdMobBanner, AdMobInterstitial } from "expo-ads-admob"
 
 
 const HomeScreen = () => {
@@ -24,7 +24,7 @@ const HomeScreen = () => {
 
     const PATTERN_GODLIKE = [
         30,
-        300,
+        200,
     ];
 
     const onSoftPress = async () => {
@@ -48,11 +48,12 @@ const HomeScreen = () => {
     const onGodlikePress = async () => {
         //
 
-        await AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712'); // Test ID, Replace with your-admob-unit-id
+        await AdMobInterstitial.setAdUnitID('ca-app-pub-8911047842940544/6516970647'); // Test ID, Replace with your-admob-unit-id
         await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
         await AdMobInterstitial.showAdAsync();
 
-  
+        Vibration.vibrate(PATTERN_GODLIKE, true)
+
     }
 
     const onStopPress = async () => {
@@ -61,20 +62,6 @@ const HomeScreen = () => {
         dropDownAlertRef.alertWithType('error', '', 'Vibration Stopped');
     }
 
-
-    useEffect(() => {
-
-        AdMobInterstitial.addEventListener('interstitialDidClose', () => {
-            console.log("CLOSED")
-            Vibration.vibrate(PATTERN_GODLIKE, true)
-            dropDownAlertRef.alertWithType('success', '', 'Godlike Mode Started');
-            
-        })
-
-        return () => {
-            AdMobInterstitial.removeAllListeners()
-        }
-    }, [])
 
 
 
@@ -136,7 +123,7 @@ const HomeScreen = () => {
                     backgroundColor="#353535"
                     color="orange"
                     icon="fire"
-                    text="Godlike"
+                    text="Extreme"
                     onPress={onGodlikePress}
                 />
 
@@ -149,7 +136,7 @@ const HomeScreen = () => {
             </TouchableOpacity>
             <AdMobBanner
                 bannerSize="banner"
-                adUnitID="ca-app-pub-3940256099942544/6300978111"
+                adUnitID="ca-app-pub-8911047842940544/6440949024"
                 onDidFailToReceiveAdWithError={(e) => { console.log(e) }}
             />
 

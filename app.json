@@ -1,13 +1,14 @@
 {
   "expo": {
-    "name": "masaj",
-    "slug": "masaj",
+    "name": "Masaj - Titreşim",
+    "slug": "masaj-titresim-massage",
+    "privacy": "unlisted",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -18,17 +19,11 @@
     ],
     "android":{
       "config":{
-        "googleMobileAdsAppId": "ca-app-pub-3940256099942544/6300978111"
-      }
-    },
-    "ios": {
-      "supportsTablet": true,
-      "config":{
-        "googleMobileAdsAppId": "ca-app-pub-3940256099942544/6300978111"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+        "googleMobileAdsAppId": "ca-app-pub-8911047842940544~4082378995"
+      },
+      "permissions": [ "VIBRATE" ],
+      "package": "com.magnakod.massage",
+      "versionCode": 1
     }
   }
 }

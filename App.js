@@ -4,18 +4,14 @@ import { Router, Drawer, Scene } from 'react-native-router-flux';
 import HomeScreen from './screens/HomeScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DrawerContent from './components/DrawerContent';
-import { setTestDeviceIDAsync } from 'expo-ads-admob';
+
+
+
 
 export default function App() {
 
 
-  useEffect(() => {
-
-    setTestDeviceIDAsync("EMULATOR")
-
-
-
-  }, [])
+  console.disableYellowBox = true
 
   return (
     <Router>

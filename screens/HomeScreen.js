@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Dimensions, Button, Vibration, Platform } from 
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DropdownAlert from 'react-native-dropdownalert';
-import { AdMobBanner, AdMobInterstitial } from "expo-ads-admob"
+import {AdMobBanner, AdMobInterstitial } from "expo-ads-admob"
 
 
 const HomeScreen = () => {
